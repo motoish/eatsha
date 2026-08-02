@@ -162,6 +162,10 @@ body {
   color: rgba(255, 248, 241, 0.45);
 }
 
+.trials-field__hint.is-error {
+  color: #e85a3a;
+}
+
 .trials-input {
   width: 5.5rem;
   padding: 0.55rem 0.7rem;

@@ -29,6 +29,7 @@ const statsBlock = document.getElementById("stats-block");
 const statsLegend = document.getElementById("stats-legend");
 const trialsField = document.getElementById("trials-field");
 const trialsInput = document.getElementById("trials-input");
+const trialsHint = document.getElementById("trials-hint");
 const modeButtons = document.querySelectorAll(".mode-btn");
 
 const TWO_PI = Math.PI * 2;
@@ -159,17 +160,47 @@ function setMode(nextMode) {
   }
 }
 
+function setTrialsHint(message, isError = false) {
+  trialsHint.textContent = message;
+  trialsHint.classList.toggle("is-error", isError);
+}
+
+function updateTrialsHint() {
+  const raw = trialsInput.value.trim();
+  const value = Number.parseInt(raw, 10);
+
+  if (raw !== "" && Number.isFinite(value) && value < MIN_TRIALS) {
+    setTrialsHint(`最小次数${MIN_TRIALS}次`, true);
+    trialsInput.classList.add("is-invalid");
+    return;
+  }
+
+  if (raw !== "" && Number.isFinite(value) && value > MAX_TRIALS) {
+    setTrialsHint(`最大次数${MAX_TRIALS}次`, true);
+    trialsInput.classList.add("is-invalid");
+    return;
+  }
+
+  trialsInput.classList.remove("is-invalid");
+  setTrialsHint(`最大次数${MAX_TRIALS}次`, false);
+}
+
 function parseTrials() {
   const raw = trialsInput.value.trim();
   const value = Number.parseInt(raw, 10);
 
   if (!Number.isFinite(value) || value < MIN_TRIALS || value > MAX_TRIALS) {
-    trialsInput.classList.add("is-invalid");
+    updateTrialsHint();
+    if (!Number.isFinite(value) || raw === "") {
+      setTrialsHint(`最小次数${MIN_TRIALS}次`, true);
+      trialsInput.classList.add("is-invalid");
+    }
     return null;
   }
 
   trialsInput.classList.remove("is-invalid");
   trialsInput.value = String(value);
+  setTrialsHint(`最大次数${MAX_TRIALS}次`, false);
   return value;
 }
 
@@ -384,9 +415,7 @@ modeButtons.forEach((button) => {
   });
 });
 
-trialsInput.addEventListener("input", () => {
-  trialsInput.classList.remove("is-invalid");
-});
+trialsInput.addEventListener("input", updateTrialsHint);
 
 spinBtn.addEventListener("click", spin);
 againBtn.addEventListener("click", () => {
@@ -410,5 +439,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 trialsInput.min = String(MIN_TRIALS);
+trialsInput.max = String(MAX_TRIALS);
 trialsInput.value = String(Math.max(DEFAULT_TRIALS, MIN_TRIALS));
+updateTrialsHint();
 drawWheel();
