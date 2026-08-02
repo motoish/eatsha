@@ -97,6 +97,9 @@ body {
   appearance: none;
   border: 0;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   background: transparent;
   color: var(--ink);
   font-family: var(--font-logo);
@@ -105,6 +108,13 @@ body {
   letter-spacing: -0.02em;
   cursor: pointer;
   transition: opacity 160ms ease;
+}
+
+.logo__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 0.28rem;
+  display: block;
 }
 
 .logo:hover {
