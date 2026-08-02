@@ -56,7 +56,6 @@ body {
 .stage {
   position: relative;
   z-index: 1;
-  display: grid;
   justify-items: center;
   align-content: center;
   gap: clamp(0.85rem, 2.5vh, 1.5rem);
@@ -65,13 +64,17 @@ body {
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: grid;
+}
+
 .stage--edit {
   align-content: start;
   padding-top: clamp(1.5rem, 5vh, 2.75rem);
-}
-
-.screen[hidden] {
-  display: none;
 }
 
 .brand {

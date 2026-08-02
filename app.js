@@ -130,7 +130,9 @@ function saveCustomNames(names) {
 
 function showScreen(name) {
   Object.entries(screens).forEach(([key, el]) => {
-    el.hidden = key !== name;
+    const isActive = key === name;
+    el.hidden = !isActive;
+    el.classList.toggle("is-active", isActive);
   });
 }
 
