@@ -1,14 +1,14 @@
 const DEFAULT_FOODS = [
-  { name: "泰国菜", color: "#E85A3A" },
+  { name: "タイ", color: "#E85A3A" },
   { name: "とりき", color: "#F0A830" },
   { name: "麦麦", color: "#D62828" },
   { name: "卡夫西", color: "#8B5E3C" },
   { name: "モスバーガー", color: "#5AA05A" },
   { name: "満州", color: "#C43C4E" },
-  { name: "池袋中餐", color: "#E0A21B" },
-  { name: "超市便当", color: "#2F9E9E" },
-  { name: "泡面", color: "#F07820" },
-  { name: "自己做", color: "#6B8F3C" },
+  { name: "池袋中華", color: "#E0A21B" },
+  { name: "スーパー弁当", color: "#2F9E9E" },
+  { name: "インスタントラーメン", color: "#F07820" },
+  { name: "自炊", color: "#6B8F3C" },
   { name: "居酒屋", color: "#3D6B9A" },
 ];
 
