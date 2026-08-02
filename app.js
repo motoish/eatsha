@@ -12,7 +12,7 @@ const FOODS = [
   { name: "居酒屋", color: "#3D6B9A" },
 ];
 
-const MIN_TRIALS = 2;
+const MIN_TRIALS = FOODS.length + 1;
 const MAX_TRIALS = 10000;
 const DEFAULT_TRIALS = 1000;
 
@@ -409,5 +409,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-trialsInput.value = String(DEFAULT_TRIALS);
+trialsInput.min = String(MIN_TRIALS);
+trialsInput.value = String(Math.max(DEFAULT_TRIALS, MIN_TRIALS));
 drawWheel();
