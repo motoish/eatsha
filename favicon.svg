@@ -1,9 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text
-    x="50"
-    y="58"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    font-size="80"
-  >>b</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="chopsticks">
+  <rect width="64" height="64" rx="14" fill="#2a1a12"/>
+  <!-- left chopstick -->
+  <rect
+    x="18"
+    y="8"
+    width="6"
+    height="48"
+    rx="3"
+    fill="#e8c17a"
+    transform="rotate(-28 21 32)"
+  />
+  <rect
+    x="18"
+    y="8"
+    width="6"
+    height="10"
+    rx="3"
+    fill="#c9893a"
+    transform="rotate(-28 21 32)"
+  />
+  <!-- right chopstick -->
+  <rect
+    x="40"
+    y="8"
+    width="6"
+    height="48"
+    rx="3"
+    fill="#f0d29a"
+    transform="rotate(28 43 32)"
+  />
+  <rect
+    x="40"
+    y="8"
+    width="6"
+    height="10"
+    rx="3"
+    fill="#d4a04a"
+    transform="rotate(28 43 32)"
+  />
 </svg>
