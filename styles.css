@@ -69,7 +69,7 @@ body {
   min-height: 100dvh;
   padding: clamp(1.25rem, 4vw, 2.5rem);
   padding-top: clamp(4.5rem, 10vh, 5.5rem);
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  padding-bottom: max(3.5rem, calc(env(safe-area-inset-bottom) + 2.75rem));
 }
 
 .screen {
@@ -91,6 +91,51 @@ body {
   z-index: 5;
   padding: 1.35rem clamp(1.25rem, 4vw, 2rem);
   padding-top: max(1.35rem, env(safe-area-inset-top));
+}
+
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  padding: 1rem clamp(1.25rem, 4vw, 2rem);
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.copyright {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  pointer-events: auto;
+  font-family: var(--font-logo);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(255, 248, 241, 0.45);
+}
+
+.copyright a {
+  color: rgba(255, 248, 241, 0.45);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.copyright a:hover {
+  color: var(--ink);
+}
+
+.copyright a:focus-visible {
+  outline: 2px solid #fff8f1;
+  outline-offset: 3px;
+}
+
+.copyright__sep {
+  opacity: 0.7;
 }
 
 .logo {
