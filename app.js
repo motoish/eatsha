@@ -572,6 +572,12 @@ function composeWheel() {
   openWheel(foodsFromNames(names), { catalogMode: "custom" });
 }
 
+document.getElementById("logo-home").addEventListener("click", () => {
+  if (isSpinning) return;
+  modal.hidden = true;
+  showScreen("home");
+});
+
 document.getElementById("enter-fixed").addEventListener("click", () => {
   openWheel(cloneDefaultFoods(), { catalogMode: "fixed" });
 });

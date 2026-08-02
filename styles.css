@@ -8,6 +8,13 @@
   --btn: #ff8a3d;
   --btn-ink: #1a120c;
   --shadow: rgba(10, 6, 3, 0.45);
+  --font-logo:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
   --font-brand: "Fredoka", "Noto Sans SC", "Noto Sans JP", sans-serif;
   --font-body: "Noto Sans SC", "Noto Sans JP", "Fredoka", sans-serif;
 }
@@ -61,6 +68,7 @@ body {
   gap: clamp(0.85rem, 2.5vh, 1.5rem);
   min-height: 100dvh;
   padding: clamp(1.25rem, 4vw, 2.5rem);
+  padding-top: clamp(4.5rem, 10vh, 5.5rem);
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
@@ -74,39 +82,55 @@ body {
 
 .stage--edit {
   align-content: start;
-  padding-top: clamp(1.5rem, 5vh, 2.75rem);
 }
 
-.brand {
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 1.35rem clamp(1.25rem, 4vw, 2rem);
+  padding-top: max(1.35rem, env(safe-area-inset-top));
+}
+
+.logo {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-logo);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.logo:hover {
+  opacity: 0.6;
+}
+
+.logo:focus-visible {
+  outline: 2px solid #fff8f1;
+  outline-offset: 4px;
+}
+
+.page-intro {
   text-align: center;
-}
-
-.brand--compact {
-  margin-bottom: 0.25rem;
-}
-
-.brand__name {
-  margin: 0;
-  font-family: var(--font-brand);
-  font-size: clamp(3rem, 12vw, 5.5rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 0.95;
-  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
   animation: brand-in 0.7s ease-out both;
 }
 
-.brand__name--sm {
-  font-size: clamp(2.1rem, 8vw, 3.2rem);
+.page-intro--compact {
+  margin-bottom: 0.15rem;
 }
 
-.brand__tagline {
-  margin: 0.55rem 0 0;
-  font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+.page-intro__title {
+  margin: 0;
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
   font-weight: 500;
   color: var(--ink-soft);
   letter-spacing: 0.08em;
-  animation: brand-in 0.7s ease-out 0.12s both;
 }
 
 .home-actions {
@@ -714,8 +738,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand__name,
-  .brand__tagline,
+  .page-intro,
   .home-actions,
   .editor,
   .controls,

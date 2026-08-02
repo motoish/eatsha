@@ -17,10 +17,13 @@
   <body>
     <div class="atmosphere" aria-hidden="true"></div>
 
+    <header class="site-header">
+      <button type="button" id="logo-home" class="logo" aria-label="回到首页">Eatsha</button>
+    </header>
+
     <section id="screen-home" class="screen stage is-active">
-      <header class="brand">
-        <h1 class="brand__name">Eatsha</h1>
-        <p class="brand__tagline">转一转，决定这顿吃什么</p>
+      <header class="page-intro">
+        <p class="page-intro__title">转一转，决定这顿吃什么</p>
       </header>
       <div class="home-actions" role="group" aria-label="大模式选择">
         <button type="button" id="enter-fixed" class="home-action">
@@ -35,9 +38,8 @@
     </section>
 
     <section id="screen-edit" class="screen stage stage--edit" hidden>
-      <header class="brand brand--compact">
-        <h1 class="brand__name brand__name--sm">Eatsha</h1>
-        <p class="brand__tagline">编辑菜品，合成转盘</p>
+      <header class="page-intro page-intro--compact">
+        <p class="page-intro__title">编辑菜品，合成转盘</p>
       </header>
 
       <div class="editor">
@@ -53,9 +55,8 @@
     </section>
 
     <section id="screen-wheel" class="screen stage" hidden>
-      <header class="brand brand--compact">
-        <h1 class="brand__name brand__name--sm">Eatsha</h1>
-        <p id="wheel-tagline" class="brand__tagline">转一转，决定这顿吃什么</p>
+      <header class="page-intro page-intro--compact">
+        <p id="wheel-tagline" class="page-intro__title">转一转，决定这顿吃什么</p>
       </header>
 
       <div class="controls" role="group" aria-label="转动模式">
