@@ -192,6 +192,16 @@ body {
   animation: brand-in 0.7s ease-out 0.15s both;
 }
 
+.food-count {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-logo);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
 .food-list {
   list-style: none;
   margin: 0;
@@ -204,9 +214,18 @@ body {
 
 .food-item {
   display: grid;
-  grid-template-columns: 14px 1fr auto;
-  gap: 0.65rem;
+  grid-template-columns: 1.6rem 14px 1fr auto;
+  gap: 0.55rem;
   align-items: center;
+}
+
+.food-item__index {
+  font-family: var(--font-logo);
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: rgba(255, 248, 241, 0.55);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .food-item__swatch {

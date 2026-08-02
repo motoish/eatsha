@@ -60,6 +60,7 @@ const trialsInput = document.getElementById("trials-input");
 const trialsHint = document.getElementById("trials-hint");
 const spinModeButtons = document.querySelectorAll("[data-spin-mode]");
 const foodListEl = document.getElementById("food-list");
+const foodCountEl = document.getElementById("food-count");
 const editHint = document.getElementById("edit-hint");
 const wheelTagline = document.getElementById("wheel-tagline");
 const wheelEditBtn = document.getElementById("wheel-edit");
@@ -156,10 +157,12 @@ function collectDraftNames() {
 
 function renderEditor(names) {
   draftNames = names.slice(0, MAX_FOODS);
+  foodCountEl.textContent = `共 ${draftNames.length} 道菜`;
   foodListEl.innerHTML = draftNames
     .map(
       (name, index) => `
       <li class="food-item">
+        <span class="food-item__index" aria-hidden="true">${index + 1}</span>
         <span class="food-item__swatch" style="background:${colorForIndex(index)}"></span>
         <input
           class="food-item__input"
@@ -168,7 +171,7 @@ function renderEditor(names) {
           value="${escapeAttr(name)}"
           aria-label="菜品 ${index + 1}"
         />
-        <button type="button" class="food-item__remove" data-index="${index}" aria-label="删除">
+        <button type="button" class="food-item__remove" data-index="${index}" aria-label="删除第 ${index + 1} 道">
           删
         </button>
       </li>
