@@ -645,11 +645,13 @@ body {
 
 .modal__title {
   margin: 0.65rem 0 1.1rem;
+  width: 100%;
   font-family: var(--font-brand);
   font-size: clamp(1.85rem, 7vw, 2.4rem);
   font-weight: 700;
   line-height: 1.2;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .stats {

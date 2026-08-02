@@ -481,6 +481,17 @@ function renderStats(stats) {
   drawPieChart(stats);
 }
 
+function fitResultTitle() {
+  resultTitle.style.fontSize = "";
+  const maxSize = Number.parseFloat(getComputedStyle(resultTitle).fontSize);
+  let size = maxSize;
+
+  while (resultTitle.scrollWidth > resultTitle.clientWidth && size > 14) {
+    size -= 1;
+    resultTitle.style.fontSize = `${size}px`;
+  }
+}
+
 function openResult(food, stats) {
   if (stats) {
     resultEyebrow.textContent = stats.isTie
@@ -497,6 +508,7 @@ function openResult(food, stats) {
   resultTitle.textContent = food.name;
   resultTitle.style.color = food.color;
   modal.hidden = false;
+  requestAnimationFrame(fitResultTitle);
   againBtn.focus();
 }
 
