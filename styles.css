@@ -133,56 +133,36 @@ body {
   letter-spacing: 0.08em;
 }
 
-.home-actions {
-  display: grid;
-  gap: 0.9rem;
-  width: min(100%, 420px);
+.home-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-top: 0.5rem;
   animation: brand-in 0.7s ease-out 0.2s both;
 }
 
-.home-action {
+.home-link {
   appearance: none;
-  width: 100%;
-  padding: 1.25rem 1.35rem;
-  border: 1px solid rgba(255, 248, 241, 0.14);
-  border-radius: 1.1rem;
-  background: rgba(255, 248, 241, 0.06);
-  color: var(--ink);
-  text-align: left;
-  cursor: pointer;
-  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-}
-
-.home-action:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 248, 241, 0.1);
-  border-color: rgba(255, 138, 61, 0.45);
-}
-
-.home-action--accent {
-  background: linear-gradient(135deg, rgba(255, 138, 61, 0.28), rgba(255, 248, 241, 0.05));
-  border-color: rgba(255, 138, 61, 0.4);
-}
-
-.home-action__title {
-  display: block;
-  font-family: var(--font-brand);
-  font-size: 1.45rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.home-action__desc {
-  display: block;
-  margin-top: 0.35rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
   color: var(--ink-soft);
-  font-size: 0.92rem;
+  font-family: var(--font-logo);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: color 160ms ease;
 }
 
-.home-action:focus-visible {
-  outline: 3px solid #fff8f1;
-  outline-offset: 3px;
+.home-link:hover {
+  color: var(--ink);
+}
+
+.home-link:focus-visible {
+  outline: 2px solid #fff8f1;
+  outline-offset: 4px;
 }
 
 .editor {
@@ -732,7 +712,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .page-intro,
-  .home-actions,
+  .home-links,
   .editor,
   .controls,
   .wheel-scene,
