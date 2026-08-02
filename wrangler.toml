@@ -1,0 +1,4 @@
+name = "eatsha"
+compatibility_date = "2026-08-02"
+# CI builds a lean dist/; local: mkdir -p dist && cp index.html styles.css app.js dist/
+pages_build_output_dir = "dist"
