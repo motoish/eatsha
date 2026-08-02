@@ -1,0 +1,9 @@
+{
+  "name": "eatsha",
+  "private": true,
+  "packageManager": "bun@1.3.14",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html styles.css app.js dist/",
+    "deploy": "bun run build && bunx wrangler pages deploy dist --project-name=eatsha"
+  }
+}
