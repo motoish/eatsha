@@ -449,7 +449,7 @@ function openResult(food, stats) {
     statsBlock.hidden = false;
     renderStats(stats);
   } else {
-    resultEyebrow.textContent = "今天就吃";
+    resultEyebrow.textContent = "这顿就吃";
     statsBlock.hidden = true;
     statsLegend.innerHTML = "";
   }
