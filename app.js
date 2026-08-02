@@ -13,7 +13,7 @@ const FOODS = [
 ];
 
 const MIN_TRIALS = FOODS.length + 1;
-const MAX_TRIALS = 10000;
+const MAX_TRIALS = 9999;
 const DEFAULT_TRIALS = 1000;
 
 const canvas = document.getElementById("wheel");
