@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Eatsha — 转一转，今天吃什么" />
+    <title>Eatsha — 今天吃什么</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <main class="stage">
+      <header class="brand">
+        <h1 class="brand__name">Eatsha</h1>
+        <p class="brand__tagline">转一转，决定今天吃什么</p>
+      </header>
+
+      <section class="wheel-scene" aria-label="美食转盘">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="640" height="640" role="img" aria-label="转盘"></canvas>
+        <button type="button" id="spin-btn" class="spin-btn" aria-label="开始转动">
+          开转
+        </button>
+      </section>
+    </main>
+
+    <div id="result-modal" class="modal" hidden>
+      <div class="modal__backdrop" data-close></div>
+      <div
+        class="modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="result-title"
+      >
+        <p class="modal__eyebrow">今天就吃</p>
+        <h2 id="result-title" class="modal__title"></h2>
+        <button type="button" id="again-btn" class="again-btn">再转一次</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
