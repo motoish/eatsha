@@ -12,21 +12,34 @@ const FOODS = [
   { name: "居酒屋", color: "#3D6B9A" },
 ];
 
+const MIN_TRIALS = 2;
+const MAX_TRIALS = 10000;
+const DEFAULT_TRIALS = 100;
+
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
+const pieCanvas = document.getElementById("pie-chart");
+const pieCtx = pieCanvas.getContext("2d");
 const spinBtn = document.getElementById("spin-btn");
 const modal = document.getElementById("result-modal");
+const resultEyebrow = document.getElementById("result-eyebrow");
 const resultTitle = document.getElementById("result-title");
 const againBtn = document.getElementById("again-btn");
+const statsBlock = document.getElementById("stats-block");
+const statsLegend = document.getElementById("stats-legend");
+const trialsField = document.getElementById("trials-field");
+const trialsInput = document.getElementById("trials-input");
+const modeButtons = document.querySelectorAll(".mode-btn");
 
 const TWO_PI = Math.PI * 2;
 const segmentAngle = TWO_PI / FOODS.length;
-/** Top pointer in canvas space (0 = east, clockwise positive). */
 const POINTER_ANGLE = -Math.PI / 2;
 
+let mode = "normal";
 let rotation = 0;
 let isSpinning = false;
 let highlightedIndex = -1;
+let lastStats = null;
 let prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
@@ -46,12 +59,12 @@ function normalizeAngle(angle) {
 }
 
 function drawWheel() {
-  const { width, height } = canvas;
+  const { width } = canvas;
   const cx = width / 2;
-  const cy = height / 2;
+  const cy = width / 2;
   const radius = width / 2 - 4;
 
-  ctx.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, width, width);
   ctx.save();
   ctx.translate(cx, cy);
   ctx.rotate(rotation);
@@ -125,17 +138,159 @@ function fitAndFillText(text, x, y, maxWidth) {
   ctx.fillText(text, x, y);
 }
 
-function getIndexAtPointer(currentRotation) {
-  const local = normalizeAngle(POINTER_ANGLE - currentRotation);
-  return Math.floor(local / segmentAngle) % FOODS.length;
-}
-
 function rotationForIndex(index) {
   const segmentCenter = index * segmentAngle + segmentAngle / 2;
   return normalizeAngle(POINTER_ANGLE - segmentCenter);
 }
 
-function openResult(food) {
+function setMode(nextMode) {
+  mode = nextMode;
+  const isProbability = mode === "probability";
+
+  modeButtons.forEach((button) => {
+    const isActive = button.dataset.mode === mode;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  trialsField.hidden = !isProbability;
+  if (isProbability) {
+    trialsInput.focus();
+  }
+}
+
+function parseTrials() {
+  const raw = trialsInput.value.trim();
+  const value = Number.parseInt(raw, 10);
+
+  if (!Number.isFinite(value) || value < MIN_TRIALS || value > MAX_TRIALS) {
+    trialsInput.classList.add("is-invalid");
+    return null;
+  }
+
+  trialsInput.classList.remove("is-invalid");
+  trialsInput.value = String(value);
+  return value;
+}
+
+function runSimulation(trials) {
+  const counts = Array(FOODS.length).fill(0);
+
+  for (let i = 0; i < trials; i += 1) {
+    const index = Math.floor(Math.random() * FOODS.length);
+    counts[index] += 1;
+  }
+
+  let maxCount = -1;
+  const winners = [];
+
+  counts.forEach((count, index) => {
+    if (count > maxCount) {
+      maxCount = count;
+      winners.length = 0;
+      winners.push(index);
+      return;
+    }
+
+    if (count === maxCount) {
+      winners.push(index);
+    }
+  });
+
+  const winnerIndex = winners[Math.floor(Math.random() * winners.length)];
+
+  return {
+    trials,
+    counts,
+    winnerIndex,
+    isTie: winners.length > 1,
+  };
+}
+
+function formatPercent(count, trials) {
+  return `${((count / trials) * 100).toFixed(1)}%`;
+}
+
+function drawPieChart(stats) {
+  const { width } = pieCanvas;
+  const cx = width / 2;
+  const cy = width / 2;
+  const radius = width / 2 - 8;
+  let angle = -Math.PI / 2;
+
+  pieCtx.clearRect(0, 0, width, width);
+
+  FOODS.forEach((food, index) => {
+    const count = stats.counts[index];
+    if (count <= 0) return;
+
+    const slice = (count / stats.trials) * TWO_PI;
+    pieCtx.beginPath();
+    pieCtx.moveTo(cx, cy);
+    pieCtx.arc(cx, cy, radius, angle, angle + slice);
+    pieCtx.closePath();
+    pieCtx.fillStyle = food.color;
+    pieCtx.fill();
+    pieCtx.strokeStyle = "rgba(26, 18, 12, 0.35)";
+    pieCtx.lineWidth = 2;
+    pieCtx.stroke();
+    angle += slice;
+  });
+
+  pieCtx.beginPath();
+  pieCtx.arc(cx, cy, radius * 0.42, 0, TWO_PI);
+  pieCtx.fillStyle = "#2a1a12";
+  pieCtx.fill();
+
+  pieCtx.fillStyle = "#fff8f1";
+  pieCtx.font = `700 ${Math.round(width * 0.09)}px Fredoka, "Noto Sans SC", sans-serif`;
+  pieCtx.textAlign = "center";
+  pieCtx.textBaseline = "middle";
+  pieCtx.fillText(`${stats.trials}`, cx, cy - width * 0.035);
+  pieCtx.font = `500 ${Math.round(width * 0.055)}px "Noto Sans SC", sans-serif`;
+  pieCtx.fillStyle = "rgba(255, 248, 241, 0.72)";
+  pieCtx.fillText("次", cx, cy + width * 0.055);
+}
+
+function renderStats(stats) {
+  const ranked = FOODS.map((food, index) => ({
+    food,
+    index,
+    count: stats.counts[index],
+  })).sort((a, b) => b.count - a.count || a.index - b.index);
+
+  statsLegend.innerHTML = ranked
+    .map(({ food, index, count }) => {
+      const isWinner = index === stats.winnerIndex;
+      return `
+        <li class="${isWinner ? "is-winner" : ""}">
+          <span class="stats__swatch" style="background:${food.color}"></span>
+          <span>${food.name}${isWinner ? " · 最多" : ""}</span>
+          <span class="stats__count">${count}次</span>
+          <span class="stats__pct">${formatPercent(count, stats.trials)}</span>
+        </li>
+      `;
+    })
+    .join("");
+
+  drawPieChart(stats);
+}
+
+function openResult(food, stats) {
+  lastStats = stats;
+
+  if (stats) {
+    resultEyebrow.textContent = stats.isTie
+      ? `${stats.trials} 次并列最多，随机选中`
+      : `${stats.trials} 次里出现最多`;
+    statsBlock.hidden = false;
+    renderStats(stats);
+  } else {
+    resultEyebrow.textContent = "今天就吃";
+    statsBlock.hidden = true;
+    statsLegend.innerHTML = "";
+  }
+
   resultTitle.textContent = food.name;
   resultTitle.style.color = food.color;
   modal.hidden = false;
@@ -145,21 +300,13 @@ function openResult(food) {
 function closeResult() {
   modal.hidden = true;
   highlightedIndex = -1;
+  lastStats = null;
   canvas.classList.remove("is-highlight");
   drawWheel();
   spinBtn.focus();
 }
 
-function spin() {
-  if (isSpinning) return;
-
-  modal.hidden = true;
-  isSpinning = true;
-  spinBtn.disabled = true;
-  highlightedIndex = -1;
-  canvas.classList.remove("is-highlight");
-
-  const targetIndex = Math.floor(Math.random() * FOODS.length);
+function animateToIndex(targetIndex, onDone) {
   const current = normalizeAngle(rotation);
   const desired = rotationForIndex(targetIndex);
   const extraTurns = (4 + Math.floor(Math.random() * 3)) * TWO_PI;
@@ -185,13 +332,61 @@ function spin() {
     highlightedIndex = targetIndex;
     canvas.classList.add("is-highlight");
     drawWheel();
-    isSpinning = false;
-    spinBtn.disabled = false;
-    openResult(FOODS[highlightedIndex]);
+    onDone();
   }
 
   requestAnimationFrame(frame);
 }
+
+function spin() {
+  if (isSpinning) return;
+
+  let stats = null;
+  let targetIndex;
+
+  if (mode === "probability") {
+    const trials = parseTrials();
+    if (trials === null) {
+      trialsInput.focus();
+      return;
+    }
+    stats = runSimulation(trials);
+    targetIndex = stats.winnerIndex;
+  } else {
+    targetIndex = Math.floor(Math.random() * FOODS.length);
+  }
+
+  modal.hidden = true;
+  isSpinning = true;
+  spinBtn.disabled = true;
+  modeButtons.forEach((button) => {
+    button.disabled = true;
+  });
+  trialsInput.disabled = true;
+  highlightedIndex = -1;
+  canvas.classList.remove("is-highlight");
+
+  animateToIndex(targetIndex, () => {
+    isSpinning = false;
+    spinBtn.disabled = false;
+    modeButtons.forEach((button) => {
+      button.disabled = false;
+    });
+    trialsInput.disabled = false;
+    openResult(FOODS[targetIndex], stats);
+  });
+}
+
+modeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (isSpinning) return;
+    setMode(button.dataset.mode);
+  });
+});
+
+trialsInput.addEventListener("input", () => {
+  trialsInput.classList.remove("is-invalid");
+});
 
 spinBtn.addEventListener("click", spin);
 againBtn.addEventListener("click", () => {
@@ -214,4 +409,5 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+trialsInput.value = String(DEFAULT_TRIALS);
 drawWheel();

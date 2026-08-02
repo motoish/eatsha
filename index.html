@@ -22,6 +22,41 @@
         <p class="brand__tagline">转一转，决定今天吃什么</p>
       </header>
 
+      <div class="controls" role="group" aria-label="模式选择">
+        <div class="mode-switch">
+          <button
+            type="button"
+            class="mode-btn is-active"
+            data-mode="normal"
+            aria-pressed="true"
+          >
+            正常模式
+          </button>
+          <button
+            type="button"
+            class="mode-btn"
+            data-mode="probability"
+            aria-pressed="false"
+          >
+            概率模式
+          </button>
+        </div>
+
+        <label id="trials-field" class="trials-field" hidden>
+          <span class="trials-field__label">随机次数</span>
+          <input
+            id="trials-input"
+            class="trials-input"
+            type="number"
+            inputmode="numeric"
+            min="2"
+            max="10000"
+            step="1"
+            value="100"
+          />
+        </label>
+      </div>
+
       <section class="wheel-scene" aria-label="美食转盘">
         <div class="pointer" aria-hidden="true"></div>
         <canvas id="wheel" width="640" height="640" role="img" aria-label="转盘"></canvas>
@@ -39,8 +74,12 @@
         aria-modal="true"
         aria-labelledby="result-title"
       >
-        <p class="modal__eyebrow">今天就吃</p>
+        <p id="result-eyebrow" class="modal__eyebrow">今天就吃</p>
         <h2 id="result-title" class="modal__title"></h2>
+        <div id="stats-block" class="stats" hidden>
+          <canvas id="pie-chart" width="280" height="280" aria-label="结果占比饼图"></canvas>
+          <ul id="stats-legend" class="stats__legend"></ul>
+        </div>
         <button type="button" id="again-btn" class="again-btn">再转一次</button>
       </div>
     </div>
