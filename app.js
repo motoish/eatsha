@@ -14,7 +14,7 @@ const FOODS = [
 
 const MIN_TRIALS = 2;
 const MAX_TRIALS = 10000;
-const DEFAULT_TRIALS = 100;
+const DEFAULT_TRIALS = 1000;
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
