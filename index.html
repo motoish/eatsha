@@ -43,19 +43,22 @@
           </button>
         </div>
 
-        <label id="trials-field" class="trials-field" hidden>
-          <span class="trials-field__label">随机次数</span>
-          <input
-            id="trials-input"
-            class="trials-input"
-            type="number"
-            inputmode="numeric"
-            min="12"
-            max="9999"
-            step="1"
-            value="1000"
-          />
-        </label>
+        <div id="trials-field" class="trials-field" hidden>
+          <label class="trials-field__row" for="trials-input">
+            <span class="trials-field__label">随机次数</span>
+            <input
+              id="trials-input"
+              class="trials-input"
+              type="number"
+              inputmode="numeric"
+              min="12"
+              max="9999"
+              step="1"
+              value="1000"
+            />
+          </label>
+          <p class="trials-field__hint">最大次数9999次</p>
+        </div>
       </div>
 
       <section class="wheel-scene" aria-label="美食转盘">
