@@ -521,6 +521,47 @@ body {
   animation: pop-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.modal__close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  appearance: none;
+  border: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(255, 248, 241, 0.08);
+  color: var(--ink-soft);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  color: var(--ink);
+  background: rgba(255, 248, 241, 0.14);
+}
+
+.modal__close:focus-visible {
+  outline: 2px solid #fff8f1;
+  outline-offset: 2px;
+}
+
+.modal__actions {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.modal__actions .ghost-btn {
+  padding: 0.85rem 1rem;
+}
+
+.modal__actions .again-btn {
+  width: 100%;
+}
+
 .modal__eyebrow {
   margin: 0;
   font-size: 0.9rem;
