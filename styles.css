@@ -133,34 +133,51 @@ body {
   letter-spacing: 0.08em;
 }
 
-.home-links {
+.home-actions {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: clamp(1.5rem, 6vw, 3.5rem);
+  width: max-content;
+  max-width: 100%;
   margin-top: 0.5rem;
   animation: brand-in 0.7s ease-out 0.2s both;
 }
 
-.home-link {
+.home-action {
   appearance: none;
   border: 0;
-  padding: 0;
+  padding: 0.25rem 0;
   background: transparent;
-  color: var(--ink-soft);
-  font-family: var(--font-logo);
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  transition: color 160ms ease;
-}
-
-.home-link:hover {
   color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 160ms ease;
 }
 
-.home-link:focus-visible {
+.home-action:hover {
+  opacity: 0.75;
+}
+
+.home-action__title {
+  display: block;
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.home-action__desc {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.home-action:focus-visible {
   outline: 2px solid #fff8f1;
   outline-offset: 4px;
 }
@@ -712,7 +729,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .page-intro,
-  .home-links,
+  .home-actions,
   .editor,
   .controls,
   .wheel-scene,

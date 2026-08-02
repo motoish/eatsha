@@ -25,10 +25,16 @@
       <header class="page-intro">
         <p class="page-intro__title">转一转，决定这顿吃什么</p>
       </header>
-      <nav class="home-links" aria-label="大模式选择">
-        <button type="button" id="enter-fixed" class="home-link">固定模式 ↗</button>
-        <button type="button" id="enter-custom" class="home-link">自定义模式 ↗</button>
-      </nav>
+      <div class="home-actions" role="group" aria-label="大模式选择">
+        <button type="button" id="enter-fixed" class="home-action">
+          <span class="home-action__title">固定模式</span>
+          <span class="home-action__desc">用附近默认菜单直接转</span>
+        </button>
+        <button type="button" id="enter-custom" class="home-action">
+          <span class="home-action__title">自定义模式</span>
+          <span class="home-action__desc">自己编辑菜品，再合成转盘</span>
+        </button>
+      </div>
     </section>
 
     <section id="screen-edit" class="screen stage stage--edit" hidden>
