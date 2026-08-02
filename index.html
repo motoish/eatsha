@@ -17,18 +17,53 @@
   <body>
     <div class="atmosphere" aria-hidden="true"></div>
 
-    <main class="stage">
+    <section id="screen-home" class="screen stage">
       <header class="brand">
         <h1 class="brand__name">Eatsha</h1>
         <p class="brand__tagline">转一转，决定今天吃什么</p>
       </header>
+      <div class="home-actions" role="group" aria-label="大模式选择">
+        <button type="button" id="enter-fixed" class="home-action">
+          <span class="home-action__title">固定模式</span>
+          <span class="home-action__desc">用附近默认菜单直接转</span>
+        </button>
+        <button type="button" id="enter-custom" class="home-action home-action--accent">
+          <span class="home-action__title">自定义模式</span>
+          <span class="home-action__desc">自己编辑菜品，再合成转盘</span>
+        </button>
+      </div>
+    </section>
 
-      <div class="controls" role="group" aria-label="模式选择">
+    <section id="screen-edit" class="screen stage stage--edit" hidden>
+      <header class="brand brand--compact">
+        <h1 class="brand__name brand__name--sm">Eatsha</h1>
+        <p class="brand__tagline">编辑菜品，合成转盘</p>
+      </header>
+
+      <div class="editor">
+        <ul id="food-list" class="food-list" aria-label="菜品列表"></ul>
+        <p id="edit-hint" class="edit-hint" hidden></p>
+        <div class="editor__actions">
+          <button type="button" id="add-food" class="ghost-btn">加一道</button>
+          <button type="button" id="reset-foods" class="ghost-btn">恢复默认</button>
+        </div>
+        <button type="button" id="compose-btn" class="primary-btn">合成转盘</button>
+        <button type="button" id="edit-back-home" class="text-btn">返回首页</button>
+      </div>
+    </section>
+
+    <section id="screen-wheel" class="screen stage" hidden>
+      <header class="brand brand--compact">
+        <h1 class="brand__name brand__name--sm">Eatsha</h1>
+        <p id="wheel-tagline" class="brand__tagline">转一转，决定今天吃什么</p>
+      </header>
+
+      <div class="controls" role="group" aria-label="转动模式">
         <div class="mode-switch">
           <button
             type="button"
             class="mode-btn is-active"
-            data-mode="normal"
+            data-spin-mode="normal"
             aria-pressed="true"
           >
             正常模式
@@ -36,7 +71,7 @@
           <button
             type="button"
             class="mode-btn"
-            data-mode="probability"
+            data-spin-mode="probability"
             aria-pressed="false"
           >
             概率模式
@@ -66,7 +101,12 @@
           开转
         </button>
       </section>
-    </main>
+
+      <div class="wheel-nav">
+        <button type="button" id="wheel-edit" class="text-btn" hidden>改菜品</button>
+        <button type="button" id="wheel-back-home" class="text-btn">返回首页</button>
+      </div>
+    </section>
 
     <div id="result-modal" class="modal" hidden>
       <div class="modal__backdrop" data-close></div>

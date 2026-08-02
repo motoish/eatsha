@@ -65,8 +65,21 @@ body {
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
+.stage--edit {
+  align-content: start;
+  padding-top: clamp(1.5rem, 5vh, 2.75rem);
+}
+
+.screen[hidden] {
+  display: none;
+}
+
 .brand {
   text-align: center;
+}
+
+.brand--compact {
+  margin-bottom: 0.25rem;
 }
 
 .brand__name {
@@ -80,6 +93,10 @@ body {
   animation: brand-in 0.7s ease-out both;
 }
 
+.brand__name--sm {
+  font-size: clamp(2.1rem, 8vw, 3.2rem);
+}
+
 .brand__tagline {
   margin: 0.55rem 0 0;
   font-size: clamp(0.95rem, 2.8vw, 1.15rem);
@@ -87,6 +104,189 @@ body {
   color: var(--ink-soft);
   letter-spacing: 0.08em;
   animation: brand-in 0.7s ease-out 0.12s both;
+}
+
+.home-actions {
+  display: grid;
+  gap: 0.9rem;
+  width: min(100%, 420px);
+  margin-top: 0.5rem;
+  animation: brand-in 0.7s ease-out 0.2s both;
+}
+
+.home-action {
+  appearance: none;
+  width: 100%;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(255, 248, 241, 0.14);
+  border-radius: 1.1rem;
+  background: rgba(255, 248, 241, 0.06);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.home-action:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 248, 241, 0.1);
+  border-color: rgba(255, 138, 61, 0.45);
+}
+
+.home-action--accent {
+  background: linear-gradient(135deg, rgba(255, 138, 61, 0.28), rgba(255, 248, 241, 0.05));
+  border-color: rgba(255, 138, 61, 0.4);
+}
+
+.home-action__title {
+  display: block;
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.home-action__desc {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.home-action:focus-visible {
+  outline: 3px solid #fff8f1;
+  outline-offset: 3px;
+}
+
+.editor {
+  display: grid;
+  gap: 0.85rem;
+  width: min(100%, 420px);
+  animation: brand-in 0.7s ease-out 0.15s both;
+}
+
+.food-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  max-height: min(48dvh, 420px);
+  overflow: auto;
+}
+
+.food-item {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.food-item__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.food-item__input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(255, 248, 241, 0.16);
+  border-radius: 0.75rem;
+  background: rgba(26, 18, 12, 0.45);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.food-item__input:focus-visible {
+  outline: 2px solid var(--btn);
+  outline-offset: 2px;
+}
+
+.food-item__remove {
+  appearance: none;
+  border: 0;
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  background: rgba(232, 90, 58, 0.18);
+  color: #ffb4a2;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.editor__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.edit-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(255, 248, 241, 0.55);
+}
+
+.edit-hint.is-error {
+  color: #e85a3a;
+}
+
+.edit-hint[hidden] {
+  display: none;
+}
+
+.ghost-btn,
+.primary-btn,
+.text-btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-brand);
+  font-weight: 600;
+}
+
+.ghost-btn {
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(255, 248, 241, 0.08);
+  color: var(--ink);
+  border: 1px solid rgba(255, 248, 241, 0.12);
+}
+
+.primary-btn {
+  padding: 0.95rem 1.2rem;
+  border-radius: 999px;
+  background: var(--btn);
+  color: var(--btn-ink);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.text-btn {
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  padding: 0.35rem 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.text-btn:hover {
+  color: var(--ink);
+}
+
+.wheel-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .controls {
@@ -472,6 +672,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .brand__name,
   .brand__tagline,
+  .home-actions,
+  .editor,
   .controls,
   .wheel-scene,
   .pointer,
