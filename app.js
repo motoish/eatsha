@@ -109,24 +109,61 @@ function foodsFromNames(names) {
   }));
 }
 
+function normalizeNames(list) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .map((item) => String(item ?? "").trim())
+    .filter(Boolean)
+    .slice(0, MAX_FOODS);
+}
+
+function sameNames(a, b) {
+  if (a.length !== b.length) return false;
+  return a.every((name, index) => name === b[index]);
+}
+
 function loadCustomNames() {
+  const currentDefaults = defaultNames();
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultNames();
+    if (!raw) return currentDefaults;
+
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return defaultNames();
-    const names = parsed
-      .map((item) => String(item ?? "").trim())
-      .filter(Boolean)
-      .slice(0, MAX_FOODS);
-    return names.length >= MIN_FOODS ? names : defaultNames();
+
+    // Legacy format: bare string[]
+    if (Array.isArray(parsed)) {
+      // Old caches were usually just the previous defaults — refresh to current defaults.
+      saveCustomNames(currentDefaults);
+      return currentDefaults;
+    }
+
+    const names = normalizeNames(parsed?.names);
+    const baseline = normalizeNames(parsed?.baselineDefaults);
+
+    if (names.length < MIN_FOODS) return currentDefaults;
+
+    // Saved list was still the then-current defaults, and code defaults changed → sync.
+    if (baseline.length > 0 && sameNames(names, baseline) && !sameNames(baseline, currentDefaults)) {
+      saveCustomNames(currentDefaults);
+      return currentDefaults;
+    }
+
+    return names;
   } catch {
-    return defaultNames();
+    return currentDefaults;
   }
 }
 
 function saveCustomNames(names) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+  const cleaned = normalizeNames(names);
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      names: cleaned,
+      baselineDefaults: defaultNames(),
+    }),
+  );
 }
 
 function showScreen(name) {
