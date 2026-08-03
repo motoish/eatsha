@@ -268,11 +268,11 @@ function drawWheel() {
       ctx.fill();
       ctx.restore();
       ctx.lineWidth = 6;
-      ctx.strokeStyle = "#fff8f1";
+      ctx.strokeStyle = "#f0faf6";
       ctx.stroke();
     } else {
       ctx.lineWidth = 2;
-      ctx.strokeStyle = "rgba(26, 18, 12, 0.35)";
+      ctx.strokeStyle = "rgba(10, 28, 24, 0.35)";
       ctx.stroke();
     }
 
@@ -284,7 +284,7 @@ function drawWheel() {
 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillStyle = "#fff8f1";
+    ctx.fillStyle = "#f0faf6";
     ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
     ctx.shadowBlur = 4;
 
@@ -296,7 +296,7 @@ function drawWheel() {
 
   ctx.beginPath();
   ctx.arc(0, 0, radius * 0.14, 0, TWO_PI);
-  ctx.fillStyle = "#1a120c";
+  ctx.fillStyle = "#0a1614";
   ctx.fill();
   ctx.restore();
 }
@@ -439,7 +439,7 @@ function drawPieChart(stats) {
     pieCtx.closePath();
     pieCtx.fillStyle = food.color;
     pieCtx.fill();
-    pieCtx.strokeStyle = "rgba(26, 18, 12, 0.35)";
+    pieCtx.strokeStyle = "rgba(10, 28, 24, 0.35)";
     pieCtx.lineWidth = 2;
     pieCtx.stroke();
     angle += slice;
@@ -447,9 +447,9 @@ function drawPieChart(stats) {
 
   pieCtx.beginPath();
   pieCtx.arc(cx, cy, radius * 0.42, 0, TWO_PI);
-  pieCtx.fillStyle = "#2a1a12";
+  pieCtx.fillStyle = "#122824";
   pieCtx.fill();
-  pieCtx.fillStyle = "#fff8f1";
+  pieCtx.fillStyle = "#f0faf6";
   pieCtx.font = `700 ${Math.round(width * 0.09)}px Fredoka, "Noto Sans SC", sans-serif`;
   pieCtx.textAlign = "center";
   pieCtx.textBaseline = "middle";
