@@ -15,6 +15,13 @@ Entries use original git commit messages, grouped by Conventional Commit type:
 
 - fix: display current version
 
+## [1.0.1] - 2026-08-04
+
+### Changed
+
+- chore: change background color
+- chore: modify changelog claim
+
 ## [1.0.0] - 2026-08-03
 
 ### Added
@@ -59,9 +66,7 @@ Entries use original git commit messages, grouped by Conventional Commit type:
 - fix: add _headers to config cache control
 - fix: fit result title
 
-[unreleased]: https://github.com/motoish/eatsha/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/motoish/eatsha/releases/tag/v1.0.0
-
 [unreleased]: https://github.com/motoish/eatsha/compare/v1.0.2...HEAD
-[1.0.2]: https://github.com/motoish/eatsha/compare/v1.0.0...v1.0.2
+[1.0.2]: https://github.com/motoish/eatsha/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/motoish/eatsha/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/motoish/eatsha/releases/tag/v1.0.0
