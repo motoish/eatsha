@@ -9,7 +9,7 @@
  *   bun run release 1.2.3        # explicit version override
  *
  * Then:
- *   git add package.json CHANGELOG.md
+ *   git add package.json version.js CHANGELOG.md
  *   git commit -m "chore: release vX.Y.Z"
  *   git tag vX.Y.Z
  *   git push origin HEAD --tags
@@ -127,6 +127,7 @@ if (tag === `v${previous}` && messages.length === 0 && bumpKind !== "explicit") 
 
 pkg.version = version;
 await Bun.write(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
+await Bun.$`bun scripts/write-version.js`;
 await Bun.$`bun scripts/generate-changelog.js`;
 
 console.log(`
@@ -137,7 +138,7 @@ Release prepared
   next     : ${version}
 
 Next steps:
-  git add package.json CHANGELOG.md
+  git add package.json version.js CHANGELOG.md
   git commit -m "chore: release v${version}"
   git tag v${version}
   git push origin HEAD --tags

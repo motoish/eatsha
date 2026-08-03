@@ -717,4 +717,10 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !modal.hidden) closeResult();
 });
 
+const appVersion = document.getElementById("app-version");
+if (appVersion) {
+  const version = window.__EATSHA_VERSION__;
+  appVersion.textContent = version ? `v${version}` : "";
+}
+
 showScreen("home");
