@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+Entries use original git commit messages, grouped by Conventional Commit type:
+`feat` → Added, `chore` → Changed, `fix` → Fixed.
+
 ## [Unreleased]
+
+## [1.0.2] - 2026-08-04
+
+### Fixed
+
+- fix: display current version
 
 ## [1.0.0] - 2026-08-03
 
@@ -51,4 +60,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - fix: fit result title
 
 [unreleased]: https://github.com/motoish/eatsha/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/motoish/eatsha/releases/tag/v1.0.0
+
+[unreleased]: https://github.com/motoish/eatsha/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/motoish/eatsha/compare/v1.0.0...v1.0.2
 [1.0.0]: https://github.com/motoish/eatsha/releases/tag/v1.0.0

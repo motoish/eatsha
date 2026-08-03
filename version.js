@@ -1,1 +1,1 @@
-window.__EATSHA_VERSION__ = "1.0.1";
+window.__EATSHA_VERSION__ = "1.0.2";

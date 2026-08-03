@@ -1,6 +1,6 @@
 {
   "name": "eatsha",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "packageManager": "bun@1.3.14",
   "scripts": {
